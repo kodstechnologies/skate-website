@@ -37,6 +37,10 @@ jobs:
             echo "📂 Go to project"
             cd /home/ubuntu/skate-website
 
+            echo "🧹 Remove local changes"
+            git reset --hard
+            git clean -fd
+
             echo "⬇️ Pull latest code"
             git pull origin main
 
