@@ -1,26 +1,6 @@
-import { useState } from 'react';
 import { useNavigate } from 'react-router-dom';
-import { motion, AnimatePresence } from 'framer-motion';
+import { motion } from 'framer-motion';
 import PageLayout from '../components/layout/PageLayout';
-
-const SECTIONS = [
-  { id: 1,  title: 'Information We Collect',                content: 'KRSA may collect personal information including full name, date of birth, address, district, club affiliation, RSFI number, email address, phone number, photographs, and identification records required for athlete management and administrative operations.' },
-  { id: 2,  title: 'Sensitive Documents and Verification Data', content: 'The platform may collect Aadhaar documents, school bonafide certificates, registration forms, NOCs, passport-size photographs, and other verification documents for identity validation, eligibility assessment, and digital ID generation.' },
-  { id: 3,  title: 'Transaction and Payment Information',    content: 'Transaction records relating to championships, trainings, seminars, sponsorships, or donations may be collected and maintained. Payment processing is performed through authorized third-party payment providers.' },
-  { id: 4,  title: 'Technical and Usage Data',              content: 'KRSA may collect device information, IP addresses, browser details, login timestamps, session activity, audit logs, and system interaction data for operational monitoring, analytics, and security enforcement.' },
-  { id: 5,  title: 'Purpose of Data Usage',                 content: 'Collected information is used for registration processing, skater ID generation, championship participation, rankings, result management, event communication, training enrollment, certificate issuance, support services, audit compliance, and administrative workflows.' },
-  { id: 6,  title: 'Data Mapping and Administrative Visibility', content: 'User data may be mapped according to district, club, discipline, or administrative hierarchy. District and club administrators shall only access data relevant to their authorized jurisdiction.' },
-  { id: 7,  title: 'Data Security Measures',                content: 'KRSA implements encryption, access controls, secure authentication, audit trails, restricted administrative permissions, and monitoring systems to protect data against unauthorized access, disclosure, misuse, or alteration.' },
-  { id: 8,  title: 'Data Retention',                       content: 'KRSA may retain user records, registrations, rankings, certificates, payment history, and administrative logs for operational, legal, audit, archival, and federation compliance purposes.' },
-  { id: 9,  title: 'Third-Party Sharing',                  content: 'Information may be shared with payment processors, technical committees, district authorities, event organizers, and RSFI where necessary for legitimate operational, verification, competition, or compliance purposes.' },
-  { id: 10, title: 'Children and Minor Users',              content: 'Registrations involving minors must be submitted or approved by parents or legal guardians. Guardians confirm that all submitted data is accurate and lawfully provided.' },
-  { id: 11, title: 'Cookies and Analytics',                 content: 'The web platform may use cookies, analytics tools, session identifiers, and similar technologies to improve functionality, optimize performance, and enhance user experience.' },
-  { id: 12, title: 'User Rights',                          content: 'Users may access their dashboard, review uploaded documents, request corrections to profile information, access approved certificates, and submit support or grievance requests through official channels.' },
-  { id: 13, title: 'Restrictions and Abuse Prevention',    content: 'KRSA reserves the right to investigate suspicious activities, fraudulent registrations, unauthorized access attempts, abusive behavior, or misuse of platform services.' },
-  { id: 14, title: 'International and Legal Compliance',   content: 'KRSA processes information in accordance with applicable Indian laws, sports governance requirements, and lawful regulatory obligations.' },
-  { id: 15, title: 'Policy Updates',                       content: 'KRSA may update this Privacy Policy periodically to reflect operational, legal, technical, or regulatory changes. Continued use of the platform indicates acceptance of the revised policy.' },
-  { id: 16, title: 'Contact and Grievance Support',        content: 'Users may contact KRSA through official communication channels for privacy concerns, data correction requests, compliance matters, or grievance resolution.' },
-];
 
 const ShieldIcon = () => (
   <svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="1.8" strokeLinecap="round" strokeLinejoin="round">
@@ -28,43 +8,39 @@ const ShieldIcon = () => (
   </svg>
 );
 
-function AccordionItem({ section, index }) {
-  const [open, setOpen] = useState(false);
-  return (
-    <motion.div
-      initial={{ opacity: 0, y: 20 }} animate={{ opacity: 1, y: 0 }}
-      transition={{ delay: index * 0.04, duration: 0.45, ease: [0.25, 0.46, 0.45, 0.94] }}
-      style={{ borderRadius: '14px', border: `1px solid ${open ? 'rgba(255,107,0,0.35)' : 'var(--clr-border-2)'}`, background: 'var(--clr-surface)', overflow: 'hidden', boxShadow: open ? '0 8px 32px rgba(255,107,0,0.10)' : 'var(--shadow-card)', transition: 'box-shadow 0.3s, border-color 0.3s' }}>
-      <button onClick={() => setOpen(v => !v)}
-        style={{ width: '100%', padding: '1.25rem 1.5rem', display: 'flex', alignItems: 'center', gap: '1rem', background: 'transparent', border: 'none', cursor: 'pointer', textAlign: 'left' }}>
-        <span style={{ minWidth: '36px', height: '36px', borderRadius: '10px', background: open ? 'var(--grad-accent)' : 'var(--clr-surface-2)', display: 'flex', alignItems: 'center', justifyContent: 'center', fontFamily: 'var(--font-head)', fontWeight: 700, fontSize: '0.78rem', color: open ? '#fff' : 'var(--clr-muted-2)', transition: 'all 0.3s', flexShrink: 0 }}>
-          {String(section.id).padStart(2, '0')}
-        </span>
-        <span style={{ flex: 1, fontFamily: 'var(--font-head)', fontWeight: 600, fontSize: 'clamp(0.9rem,2vw,1.05rem)', color: open ? 'var(--clr-accent)' : 'var(--clr-text)', transition: 'color 0.25s', lineHeight: 1.3 }}>
-          {section.title}
-        </span>
-        <span style={{ width: '28px', height: '28px', borderRadius: '8px', background: 'var(--clr-surface-2)', display: 'flex', alignItems: 'center', justifyContent: 'center', flexShrink: 0, transition: 'transform 0.3s', transform: open ? 'rotate(180deg)' : 'none' }}>
-          <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2.5" strokeLinecap="round" strokeLinejoin="round"><polyline points="6 9 12 15 18 9"/></svg>
-        </span>
-      </button>
-      <AnimatePresence initial={false}>
-        {open && (
-          <motion.div key="body" initial={{ height: 0, opacity: 0 }} animate={{ height: 'auto', opacity: 1 }} exit={{ height: 0, opacity: 0 }} transition={{ duration: 0.35, ease: [0.25, 0.46, 0.45, 0.94] }} style={{ overflow: 'hidden' }}>
-            <div style={{ padding: '1rem 1.5rem 1.35rem 4.5rem', color: 'var(--clr-muted-2)', fontSize: '0.9rem', lineHeight: 1.85, borderTop: '1px solid var(--clr-border)' }}>
-              {section.content}
-            </div>
-          </motion.div>
-        )}
-      </AnimatePresence>
-    </motion.div>
-  );
-}
+const h3 = {
+  fontFamily: 'var(--font-head)',
+  fontWeight: 700,
+  fontSize: 'clamp(1.05rem,2.2vw,1.2rem)',
+  color: 'var(--clr-text)',
+  margin: '2rem 0 0.75rem',
+  lineHeight: 1.3,
+};
+
+const p = {
+  color: 'var(--clr-muted-2)',
+  fontSize: '0.95rem',
+  lineHeight: 1.85,
+  margin: '0 0 0.75rem',
+};
+
+const ul = {
+  margin: '0 0 0.75rem',
+  paddingLeft: '1.25rem',
+  color: 'var(--clr-muted-2)',
+  fontSize: '0.95rem',
+  lineHeight: 1.85,
+  display: 'flex',
+  flexDirection: 'column',
+  gap: '0.45rem',
+};
+
+const strong = { color: 'var(--clr-text)', fontWeight: 600 };
 
 export default function PrivacyPolicy() {
   const navigate = useNavigate();
   return (
     <PageLayout title="Privacy Policy">
-      {/* Ambient glow */}
       <div style={{ position: 'relative', overflow: 'hidden', padding: 'clamp(2.5rem,6vw,5rem) 0 clamp(1.5rem,3vw,2.5rem)' }}>
         <div style={{ position: 'absolute', top: '-60px', left: '50%', transform: 'translateX(-50%)', width: '700px', height: '280px', pointerEvents: 'none', background: 'radial-gradient(ellipse at center, rgba(255,107,0,0.1) 0%, transparent 70%)' }} />
         <div style={{ position: 'absolute', inset: 0, pointerEvents: 'none', backgroundImage: 'linear-gradient(var(--clr-dot-grid) 1px, transparent 1px), linear-gradient(90deg, var(--clr-dot-grid) 1px, transparent 1px)', backgroundSize: '32px 32px', maskImage: 'radial-gradient(ellipse 80% 60% at 50% 0%, black 40%, transparent 100%)' }} />
@@ -73,7 +49,7 @@ export default function PrivacyPolicy() {
           <motion.div initial={{ opacity: 0, y: -12 }} animate={{ opacity: 1, y: 0 }} transition={{ duration: 0.5 }}
             style={{ display: 'inline-flex', alignItems: 'center', gap: '0.5rem', background: 'rgba(255,107,0,0.1)', border: '1px solid rgba(255,107,0,0.25)', borderRadius: '999px', padding: '0.3rem 0.9rem', marginBottom: '1.4rem' }}>
             <span style={{ color: 'var(--clr-accent)' }}><ShieldIcon /></span>
-            <span style={{ color: 'var(--clr-accent)', fontSize: '0.75rem', fontWeight: 600, letterSpacing: '0.1em', textTransform: 'uppercase' }}>KRSA Digital Ecosystem</span>
+            <span style={{ color: 'var(--clr-accent)', fontSize: '0.75rem', fontWeight: 600, letterSpacing: '0.1em', textTransform: 'uppercase' }}>Skate Karnataka</span>
           </motion.div>
 
           <motion.h1 initial={{ opacity: 0, y: 16 }} animate={{ opacity: 1, y: 0 }} transition={{ delay: 0.1, duration: 0.55 }}
@@ -82,33 +58,96 @@ export default function PrivacyPolicy() {
             <span style={{ background: 'var(--grad-text-hero)', WebkitBackgroundClip: 'text', WebkitTextFillColor: 'transparent', backgroundClip: 'text' }}>Policy</span>
           </motion.h1>
 
-          <motion.p initial={{ opacity: 0, y: 12 }} animate={{ opacity: 1, y: 0 }} transition={{ delay: 0.2, duration: 0.5 }}
-            style={{ color: 'var(--clr-muted-2)', fontSize: 'clamp(0.88rem,2vw,1rem)', maxWidth: '540px', margin: '0 auto 1.2rem', lineHeight: 1.75 }}>
-            This Privacy Policy explains how the Karnataka Roller Skating Association (KRSA) collects, processes, stores, protects, and uses information within the KRSA Digital Ecosystem.
-          </motion.p>
-
-          <motion.span initial={{ opacity: 0 }} animate={{ opacity: 1 }} transition={{ delay: 0.35, duration: 0.5 }}
-            style={{ display: 'inline-block', background: 'var(--clr-surface-2)', border: '1px solid var(--clr-border)', borderRadius: '8px', padding: '0.3rem 0.8rem', fontSize: '0.75rem', color: 'var(--clr-muted)' }}>
-            Last updated: May 2026
-          </motion.span>
+          <motion.div initial={{ opacity: 0 }} animate={{ opacity: 1 }} transition={{ delay: 0.25 }}
+            style={{ display: 'flex', flexWrap: 'wrap', gap: '0.5rem', justifyContent: 'center' }}>
+            <span style={{ display: 'inline-block', background: 'var(--clr-surface-2)', border: '1px solid var(--clr-border)', borderRadius: '8px', padding: '0.3rem 0.8rem', fontSize: '0.75rem', color: 'var(--clr-muted)' }}>
+              Effective Date: July 14, 2026
+            </span>
+            <span style={{ display: 'inline-block', background: 'var(--clr-surface-2)', border: '1px solid var(--clr-border)', borderRadius: '8px', padding: '0.3rem 0.8rem', fontSize: '0.75rem', color: 'var(--clr-muted)' }}>
+              Data Fiduciary: Karnataka Roller Skating Association (KRSA)
+            </span>
+            <span style={{ display: 'inline-block', background: 'var(--clr-surface-2)', border: '1px solid var(--clr-border)', borderRadius: '8px', padding: '0.3rem 0.8rem', fontSize: '0.75rem', color: 'var(--clr-muted)' }}>
+              App Covered: Skate Karnataka Mobile Application
+            </span>
+          </motion.div>
         </div>
       </div>
 
       <div style={{ height: '1px', background: 'var(--grad-divider)', maxWidth: '860px', margin: '0 auto' }} />
 
-      {/* Content */}
       <div style={{ maxWidth: '860px', margin: '0 auto', padding: 'clamp(2rem,5vw,3rem) clamp(1rem,4vw,2rem) clamp(3rem,6vw,5rem)' }}>
+        <motion.article
+          initial={{ opacity: 0, y: 16 }}
+          animate={{ opacity: 1, y: 0 }}
+          transition={{ delay: 0.15, duration: 0.5 }}
+        >
+          <h2 style={{ ...h3, marginTop: 0, fontSize: 'clamp(1.15rem,2.5vw,1.35rem)', color: 'var(--clr-accent)' }}>
+            PRIVACY POLICY FOR SKATE KARNATAKA
+          </h2>
 
+          <p style={p}>
+            At the Karnataka Roller Skating Association (KRSA), we value your trust and are committed to protecting your privacy. This Privacy Policy explains how we collect, use, store, and process your personal data in compliance with the Digital Personal Data Protection (DPDP) Act, 2023 of India, when you access and use the Skate Karnataka mobile application and its associated Web Admin Panel.
+          </p>
+          <p style={p}>
+            Please read this Privacy Policy carefully to understand our practices regarding your personal data.
+          </p>
 
+          <h3 style={h3}>1. Information We Collect</h3>
+          <p style={p}>We collect personal data to authenticate your identity, manage club affiliations, process event registrations, and administer state-level sports tournaments.</p>
+          <ul style={ul}>
+            <li><span style={strong}>Basic Identity &amp; Contact Information:</span> Full Name, Address, selected District, Gender, Email Address, and Contact Number.</li>
+            <li><span style={strong}>Association Details:</span> Role classification (e.g., Skater, Parent, School, Academy, Officials, Guest) and RFSI ID.</li>
+            <li><span style={strong}>Minor&apos;s Data:</span> Because skater profiles may belong to children under the age of 18, a parent can register and add a maximum of 2 child profiles. We process children&apos;s personal data only with explicit parental consent.</li>
+            <li><span style={strong}>Verification Media:</span> Profile information verification requests, and images or videos uploaded by users (Clubs, Districts, or State admins) to the app gallery.</li>
+            <li><span style={strong}>Support and Feedback Information:</span> Feedback, suggestions, and complaints (issues) raised by users against a Club, District, or Skater through our in-app sidebar and dynamic support sections.</li>
+            <li><span style={strong}>Financial Information:</span> Transaction records, status, and payment logs generated when completing payments to register for competitions and championships. (Note: We do not directly store your credit card or net banking details; all payments are securely processed by our third-party payment gateway integration).</li>
+            <li><span style={strong}>Data Collection for Passive Roles:</span> Registration data provided by School, Academy, Official, and Guest users is collected strictly for administrative reporting and association records. These roles do not receive active dashboard access in the mobile app or web panel.</li>
+          </ul>
 
-        {/* Accordion */}
-        <div style={{ display: 'flex', flexDirection: 'column', gap: '0.75rem' }}>
-          {SECTIONS.map((s, i) => <AccordionItem key={s.id} section={s} index={i} />)}
-        </div>
+          <h3 style={h3}>2. Legal Basis for Processing</h3>
+          <p style={p}>We process your personal data based on your explicit Consent. For minor skaters, consent is provided by their verified parent or legal guardian.</p>
+          <p style={p}>In certain instances, processing is necessary to perform a contract (such as managing your club enrollment or facilitating your participation in a registered competition).</p>
 
-        {/* Back button (moved to bottom) */}
+          <h3 style={h3}>3. Device Permissions Required</h3>
+          <p style={p}>To enable full application functionality, the app may request the following permissions on your mobile device:</p>
+          <ul style={ul}>
+            <li><span style={strong}>Storage / Photos / Media:</span> To allow permitted roles (Clubs, Districts, State admins) to upload photos and videos to the app gallery.</li>
+            <li><span style={strong}>Network &amp; Internet Access:</span> To verify credentials via Email OTP, query real-time results, manage profiles, and process registration payments.</li>
+          </ul>
+
+          <h3 style={h3}>4. Data Sharing and Transfer</h3>
+          <p style={p}>We do not sell your personal data. Your data is shared strictly within the official hierarchical structure of the Karnataka Roller Skating Association to facilitate smooth operations:</p>
+          <ul style={ul}>
+            <li><span style={strong}>Club, District, and State Administrators:</span> For approving club join/leave requests, managing event registrations, updating results, and resolving escalated complaints.</li>
+            <li><span style={strong}>Payment Processors:</span> Necessary payment details are shared with verified third-party payment gateways to process event fees.</li>
+            <li><span style={strong}>Legal Authorities:</span> We may disclose your information if required by law, regulatory authorities, or court orders to protect association rights and user safety.</li>
+          </ul>
+
+          <h3 style={h3}>5. Data Retention and Security</h3>
+          <ul style={ul}>
+            <li><span style={strong}>Retention:</span> We retain your personal data as long as your account is active, or as long as necessary to maintain accurate historical sports achievements, certificates, and participation records.</li>
+            <li><span style={strong}>Security:</span> We use industry-standard physical, technical, and administrative security measures to safeguard your personal data against unauthorized access, loss, alteration, or disclosure.</li>
+          </ul>
+
+          <h3 style={h3}>6. Your Rights (Data Principals)</h3>
+          <p style={p}>Under the DPDP Act, 2023, you have the following rights:</p>
+          <ul style={ul}>
+            <li><span style={strong}>Right to Access &amp; Summary:</span> You can request a summary of the personal data processed by us.</li>
+            <li><span style={strong}>Right to Correction &amp; Erasure:</span> You can update your profile details. (Please note: Editing sensitive fields like the RFSI ID requires verification and approval from your affiliated Club before updating). You may request deletion of your account, subject to necessary compliance and active tournament records.</li>
+            <li><span style={strong}>Right to Withdraw Consent:</span> You may withdraw your consent for processing at any time, though this may restrict your ability to participate in events, join clubs, or use the app.</li>
+            <li><span style={strong}>Right to Grievance Redressal:</span> You have the right to register a complaint regarding the processing of your personal data.</li>
+          </ul>
+
+          <h3 style={h3}>7. Grievance Redressal &amp; Contact Us</h3>
+          <p style={p}>If you have questions about this Privacy Policy, wish to exercise your rights, or want to file a complaint, please contact our Grievance Officer:</p>
+          <ul style={{ ...ul, marginBottom: 0 }}>
+            <li><span style={strong}>Email:</span> skaterkarnataka@gmail.com</li>
+            <li><span style={strong}>Mailing Address:</span> Karnataka Roller Skating Association (KRSA), Bengaluru, Karnataka, India</li>
+          </ul>
+        </motion.article>
+
         <motion.div initial={{ opacity: 0, y: 10 }} whileInView={{ opacity: 1, y: 0 }} viewport={{ once: true }} transition={{ duration: 0.4 }}
-          style={{ marginTop: '2rem', display: 'flex', justifyContent: 'center' }}>
+          style={{ marginTop: '2.5rem', display: 'flex', justifyContent: 'center' }}>
           <button onClick={() => navigate('/')}
             style={{ display: 'inline-flex', alignItems: 'center', gap: '0.5rem', background: 'var(--clr-surface)', border: '1px solid var(--clr-border-2)', borderRadius: '10px', padding: '0.55rem 1.1rem', color: 'var(--clr-text)', cursor: 'pointer', fontFamily: 'var(--font-body)', fontSize: '0.85rem', fontWeight: 500, transition: 'all 0.22s ease', boxShadow: 'var(--shadow-card)' }}
             onMouseEnter={e => { e.currentTarget.style.borderColor = 'var(--clr-accent)'; e.currentTarget.style.color = 'var(--clr-accent)'; }}

@@ -10,15 +10,15 @@ gsap.registerPlugin(ScrollTrigger);
 const PAL = ['#FF6B00','#8B5CF6','#00CFFF','#FF2D7A','#10B981','#F59E0B'];
 
 /* ── CSS UI Mockups ── */
-const Mockup0 = ({ a }) => ( /* Auth: Mobile OTP + 6 roles */
+const Mockup0 = ({ a }) => ( /* Auth: Email OTP + 6 roles */
   <div style={{ marginTop: 'auto' }}>
     <div style={{ background: 'rgba(255,255,255,0.05)', border: `1px solid ${a}35`, borderRadius: 14, padding: '0.9rem 1rem', backdropFilter: 'blur(8px)' }}>
-      {/* Mobile OTP header */}
+      {/* Email OTP header */}
       <div style={{ display: 'flex', alignItems: 'center', gap: 8, marginBottom: 10 }}>
-        <div style={{ width: 26, height: 26, borderRadius: '50%', background: `${a}25`, border: `1px solid ${a}55`, display: 'flex', alignItems: 'center', justifyContent: 'center', fontSize: 12 }}>📱</div>
+        <div style={{ width: 26, height: 26, borderRadius: '50%', background: `${a}25`, border: `1px solid ${a}55`, display: 'flex', alignItems: 'center', justifyContent: 'center', fontSize: 12 }}>✉️</div>
         <div>
-          <div style={{ fontSize: '0.68rem', fontWeight: 700, color: 'var(--clr-text)', fontFamily: 'var(--font-head)' }}>Mobile OTP Login</div>
-          <div style={{ fontSize: '0.56rem', color: 'var(--clr-muted)' }}>+91 •••• •••• 42</div>
+          <div style={{ fontSize: '0.68rem', fontWeight: 700, color: 'var(--clr-text)', fontFamily: 'var(--font-head)' }}>Email OTP Login</div>
+          <div style={{ fontSize: '0.56rem', color: 'var(--clr-muted)' }}>sk••••@gmail.com</div>
         </div>
       </div>
       {/* OTP boxes */}
@@ -56,7 +56,7 @@ const Mockup1 = ({ a }) => ( /* Digital ID card */
 
 const Mockup2 = ({ a }) => ( /* Championship events */
   <div style={{ marginTop: 'auto', display: 'flex', flexDirection: 'column', gap: 6 }}>
-    {[['State Championship','May 18','Eligible'],['District Speed Cup','Jun 02','Register'],['Training Camp','Jun 15','Open']].map(([name,date,tag],i) => (
+    {[['District Speed Cup','Jun 02','Register'],['Club Open Meet','Jun 10','Register'],['Academy Challenge','Jun 22','Register']].map(([name,date,tag],i) => (
       <div key={i} style={{ display: 'flex', alignItems: 'center', gap: 8, background: `rgba(255,255,255,${i===0?'0.07':'0.03'})`, border: `1px solid ${a}${i===0?'40':'20'}`, borderRadius: 10, padding: '7px 10px' }}>
         <div style={{ width: 4, height: 4, borderRadius: '50%', background: a, flexShrink: 0 }} />
         <div style={{ flex: 1, fontSize: '0.65rem', fontWeight: 700, color: 'var(--clr-text)', fontFamily: 'var(--font-head)' }}>{name}</div>
@@ -73,10 +73,10 @@ const Mockup3 = ({ a }) => ( /* Payment receipt */
       <span style={{ fontSize: '0.65rem', fontWeight: 800, color: 'var(--clr-text)', fontFamily: 'var(--font-head)' }}>Payment Confirmed</span>
       <span style={{ fontSize: '0.7rem' }}>✅</span>
     </div>
-    {[['Registration Fee','₹ 500'],['Processing','₹ 18'],['Total','₹ 518']].map(([l,v],i) => (
-      <div key={i} style={{ display: 'flex', justifyContent: 'space-between', borderTop: i===2?`1px solid ${a}30`:'none', paddingTop: i===2?6:0, marginTop: i===2?4:0 }}>
+    {[['Registration Fee','₹ 500'],['Total','₹ 500']].map(([l,v],i) => (
+      <div key={i} style={{ display: 'flex', justifyContent: 'space-between', borderTop: i===1?`1px solid ${a}30`:'none', paddingTop: i===1?6:0, marginTop: i===1?4:0 }}>
         <span style={{ fontSize: '0.6rem', color: 'var(--clr-muted)' }}>{l}</span>
-        <span style={{ fontSize: '0.6rem', fontWeight: i===2?800:600, color: i===2?a:'var(--clr-text)' }}>{v}</span>
+        <span style={{ fontSize: '0.6rem', fontWeight: i===1?800:600, color: i===1?a:'var(--clr-text)' }}>{v}</span>
       </div>
     ))}
   </div>

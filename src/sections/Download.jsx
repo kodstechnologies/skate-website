@@ -4,7 +4,7 @@ import useScrollReveal from '../hooks/useScrollReveal';
 import { fadeUp, staggerContainer } from '../lib/variants';
 
 const STORES = [
-  { tag:'Android',           name:'Google Play', href:'#', color:'#34D399', icon:(
+  { tag:'Android',           name:'Google Play', href:'https://play.google.com/store/apps/details?id=com.kodsskatekarnataka.app&pcampaignid=web_share', color:'#34D399', icon:(
     <svg width="18" height="18" viewBox="0 0 24 24" fill="currentColor"><path d="M3.18 23.76a2 2 0 01-1.18-1.8V2.04A2 2 0 013.18.28l11.9 11.74-11.9 11.74zM16.54 14.06l-2.5-2.46 2.5-2.46 2.96 1.64a1.5 1.5 0 010 2.64l-2.96 1.64zM4.5 1.1l10.2 10.06-2.12 2.08L4.5 1.1zm0 21.8l8.08-8.14 2.12 2.08L4.5 22.9z"/></svg>
   )},
   { tag:'iOS / iPadOS',      name:'App Store',   href:'#', color:'var(--clr-cyan)', icon:(
@@ -57,8 +57,9 @@ export default function Download() {
             </motion.p>
 
             <motion.div variants={staggerContainer} style={{ display:'flex', flexDirection:'column', gap:'1rem' }}>
-              {STORES.map(({ tag, name, color, icon }) => (
-                <motion.button key={name} variants={fadeUp} onClick={showToast} style={{
+              {STORES.map(({ tag, name, href, color, icon }) => {
+                const isLive = href && href !== '#';
+                const sharedStyle = {
                   display:'flex', alignItems:'center', justifyContent:'space-between',
                   width:'100%', textAlign:'left',
                   padding:'1.1rem 1.5rem',
@@ -67,30 +68,42 @@ export default function Download() {
                   borderRadius:'16px', cursor:'pointer',
                   backdropFilter:'blur(8px)',
                   transition:'all 0.25s',
-                }}
-                  onMouseEnter={e=>{ e.currentTarget.style.borderColor=`${color}50`; e.currentTarget.style.background=`${color}0D`; e.currentTarget.style.transform='translateX(6px)'; e.currentTarget.style.boxShadow=`0 8px 32px rgba(0,0,0,0.3)`; }}
-                  onMouseLeave={e=>{ e.currentTarget.style.borderColor='var(--clr-store-card-border)'; e.currentTarget.style.background='var(--clr-store-card-bg)'; e.currentTarget.style.transform=''; e.currentTarget.style.boxShadow=''; }}
-                >
-                  <div style={{ display:'flex', alignItems:'center', gap:'1rem' }}>
-                    <div style={{ width:'42px', height:'42px', borderRadius:'10px',
-                      background:`${color}18`, border:`1px solid ${color}35`,
-                      display:'flex', alignItems:'center', justifyContent:'center',
-                      color, flexShrink:0 }}>{icon}</div>
-                    <div>
-                      <div style={{ fontSize:'0.62rem', fontWeight:700, letterSpacing:'0.14em',
-                        textTransform:'uppercase', color, marginBottom:'3px' }}>{tag}</div>
-                      <div style={{ fontFamily:'var(--font-head)', fontWeight:800,
-                        fontSize:'1.05rem', color:'var(--clr-text)' }}>{name}</div>
+                  textDecoration:'none', color:'inherit',
+                };
+                const hoverProps = {
+                  onMouseEnter:e=>{ e.currentTarget.style.borderColor=`${color}50`; e.currentTarget.style.background=`${color}0D`; e.currentTarget.style.transform='translateX(6px)'; e.currentTarget.style.boxShadow=`0 8px 32px rgba(0,0,0,0.3)`; },
+                  onMouseLeave:e=>{ e.currentTarget.style.borderColor='var(--clr-store-card-border)'; e.currentTarget.style.background='var(--clr-store-card-bg)'; e.currentTarget.style.transform=''; e.currentTarget.style.boxShadow=''; },
+                };
+                const content = (
+                  <>
+                    <div style={{ display:'flex', alignItems:'center', gap:'1rem' }}>
+                      <div style={{ width:'42px', height:'42px', borderRadius:'10px',
+                        background:`${color}18`, border:`1px solid ${color}35`,
+                        display:'flex', alignItems:'center', justifyContent:'center',
+                        color, flexShrink:0 }}>{icon}</div>
+                      <div>
+                        <div style={{ fontSize:'0.62rem', fontWeight:700, letterSpacing:'0.14em',
+                          textTransform:'uppercase', color, marginBottom:'3px' }}>{tag}</div>
+                        <div style={{ fontFamily:'var(--font-head)', fontWeight:800,
+                          fontSize:'1.05rem', color:'var(--clr-text)' }}>{name}</div>
+                      </div>
                     </div>
-                  </div>
-                  <div style={{ width:'36px', height:'36px', borderRadius:'50%',
-                    border:`1px solid ${color}35`, display:'flex', alignItems:'center', justifyContent:'center', flexShrink:0 }}>
-                    <svg width="14" height="14" fill="none" stroke={color} strokeWidth="2.2" viewBox="0 0 24 24">
-                      <path d="M5 12h14M13 6l6 6-6 6" strokeLinecap="round" strokeLinejoin="round"/>
-                    </svg>
-                  </div>
-                </motion.button>
-              ))}
+                    <div style={{ width:'36px', height:'36px', borderRadius:'50%',
+                      border:`1px solid ${color}35`, display:'flex', alignItems:'center', justifyContent:'center', flexShrink:0 }}>
+                      <svg width="14" height="14" fill="none" stroke={color} strokeWidth="2.2" viewBox="0 0 24 24">
+                        <path d="M5 12h14M13 6l6 6-6 6" strokeLinecap="round" strokeLinejoin="round"/>
+                      </svg>
+                    </div>
+                  </>
+                );
+                return isLive ? (
+                  <motion.a key={name} variants={fadeUp} href={href} target="_blank" rel="noopener noreferrer"
+                    style={sharedStyle} {...hoverProps}>{content}</motion.a>
+                ) : (
+                  <motion.button key={name} variants={fadeUp} onClick={showToast}
+                    style={sharedStyle} {...hoverProps}>{content}</motion.button>
+                );
+              })}
             </motion.div>
           </motion.div>
 

@@ -4,7 +4,7 @@ export const steps = [
     id: '01',
     title: 'Verify Identity',
     description:
-      'Enter your phone or email. Receive a time-bound OTP. Verified in seconds — no passwords, no friction.',
+      'Enter your email. Receive a time-bound OTP. Verified in seconds — no passwords, no friction.',
   },
   {
     id: '02',

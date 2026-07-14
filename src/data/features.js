@@ -15,7 +15,7 @@ export const features = [
     Icon: ShieldCheck,
     title: 'Fortified Auth',
     description:
-      'Time-bound OTP authentication with role-based access across skater, club, district and admin tiers.',
+      'Time-bound email OTP authentication with role-based access across skater, club, district and admin tiers.',
   },
   {
     id: 2,
