@@ -1,0 +1,20 @@
+// District roller skating associations affiliated with KRSA (A–Z by district)
+export const districts = [
+  { id: 1,  short: 'Ballari',           name: 'Ballari District Roller Skating Association' },
+  { id: 2,  short: 'Bangalore Rural',   name: 'Bangalore Rural District Roller Skating Association' },
+  { id: 3,  short: 'Belagavi',          name: 'Belgaum District Roller Skating Association' },
+  { id: 4,  short: 'Bengaluru',         name: 'Bengaluru District Roller Sports Association' },
+  { id: 5,  short: 'Bidar',             name: 'Bidar District Roller Skating Association' },
+  { id: 6,  short: 'Chamarajanagar',    name: 'Chamarajanagar District Roller Skating Association' },
+  { id: 7,  short: 'Chikkaballapura',   name: 'Chikkaballapura District New Roller Skating Association' },
+  { id: 8,  short: 'Dakshina Kannada',  name: 'Dakshina Kannada Roller Sports Association' },
+  { id: 9,  short: 'Dharwad',           name: 'Dharwad District Roller Skating Association' },
+  { id: 10, short: 'Kalaburagi',        name: 'Kalaburagi District Roller Skating Association' },
+  { id: 11, short: 'Kolar',             name: 'Kolar District Roller Skating Association' },
+  { id: 12, short: 'Raichur',           name: 'Raichur District Roller Skating Association' },
+  { id: 13, short: 'Shivamogga',        name: 'Namma Shivamogga Roller Skating Association' },
+  { id: 14, short: 'Tumakuru',          name: 'Tumakuru District Roller Skating Association' },
+  { id: 15, short: 'Uttara Kannada',    name: 'Uttara Kannada District Roller Skating Association' },
+  { id: 16, short: 'Vijayapura',        name: 'Vijayapura District Roller Skating Association' },
+  { id: 17, short: 'Yadgir',            name: 'Yadgir District Roller Skating Association' },
+];

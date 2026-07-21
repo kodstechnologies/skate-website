@@ -194,7 +194,7 @@ export default function Hero() {
             <span style={{ position: 'relative' }}>Download App</span>
           </button>
 
-          <button id="hero-explore" onClick={() => document.querySelector('#features')?.scrollIntoView({ behavior: 'smooth' })} style={{
+          <button id="hero-explore" onClick={() => document.querySelector('#about')?.scrollIntoView({ behavior: 'smooth' })} style={{
             display: 'inline-flex', alignItems: 'center', gap: '8px',
             padding: '14px 28px', borderRadius: '14px', cursor: 'pointer',
             border: '1.5px solid rgba(255,107,0,0.4)', color: 'var(--clr-accent)',
@@ -205,7 +205,7 @@ export default function Hero() {
             onMouseEnter={e => { e.currentTarget.style.borderColor = 'var(--clr-accent)'; e.currentTarget.style.background = 'rgba(255,107,0,0.14)'; e.currentTarget.style.transform = 'translateY(-2px)'; }}
             onMouseLeave={e => { e.currentTarget.style.borderColor = 'rgba(255,107,0,0.4)'; e.currentTarget.style.background = 'rgba(255,107,0,0.06)'; e.currentTarget.style.transform = ''; }}
           >
-            Explore Platform
+            About KRSA
             <svg width="13" height="13" fill="none" stroke="currentColor" strokeWidth="2.2" strokeLinecap="round" strokeLinejoin="round" viewBox="0 0 24 24"><path d="M5 12h14M13 6l6 6-6 6" /></svg>
           </button>
         </motion.div>

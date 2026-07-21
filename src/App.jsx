@@ -5,9 +5,9 @@ import Loader   from './components/ui/Loader';
 import Navbar   from './components/layout/Navbar';
 import Footer   from './components/layout/Footer';
 import Hero     from './sections/Hero';
-import Features from './sections/Features';
+import About from './sections/About';
 
-const HowItWorks   = lazy(() => import('./sections/HowItWorks'));
+const Districts    = lazy(() => import('./sections/Districts'));
 const Disciplines  = lazy(() => import('./sections/Disciplines'));
 const Download     = lazy(() => import('./sections/Download'));
 const PrivacyPolicy      = lazy(() => import('./pages/PrivacyPolicy'));
@@ -18,9 +18,9 @@ function LandingPage() {
   return (
     <>
       <Hero />
-      <Features />
+      <About />
       <Suspense fallback={null}>
-        <HowItWorks />
+        <Districts />
         <Disciplines />
         <Download />
       </Suspense>

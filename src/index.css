@@ -163,7 +163,6 @@ main{width:100%;display:block}
 }
 @media(max-width:480px){
   .footer-grid{grid-template-columns:1fr!important}
-  #features>.container>div[class="cards-grid"],
   #disciplines>.container>div[class="disc-grid"]{grid-template-columns:1fr!important}
 }
 @media(max-width:768px){

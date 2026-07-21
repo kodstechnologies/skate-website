@@ -26,7 +26,7 @@ function DCard({ d }) {
   const bg = SPORT_BG[d.id - 1] || SPORT_BG[0];
   return (
     <div className="dcard" style={{
-      flexShrink: 0, width: 220, borderRadius: 20, marginRight: '1.1rem',
+      flexShrink: 0, width: 260, borderRadius: 20, marginRight: '1.1rem',
       background: 'var(--clr-surface)',
       border: '1px solid var(--clr-card-border-soft)',
       boxShadow: '0 4px 20px rgba(0,0,0,0.25)',
@@ -94,9 +94,9 @@ function DCard({ d }) {
       {/* Card bottom */}
       <div style={{ padding: '1rem 1.1rem 1.1rem', position: 'relative' }}>
         <div style={{ height: 2, background: `linear-gradient(90deg,${d.color},${d.color}00)`, borderRadius: 2, marginBottom: '0.75rem' }} />
-        <div style={{ display: 'flex', alignItems: 'center', justifyContent: 'space-between' }}>
-          <h3 style={{ fontFamily: 'var(--font-head)', fontWeight: 700, fontSize: '0.95rem', color: 'var(--clr-text)', lineHeight: 1.2 }}>{d.name}</h3>
-          <span style={{ fontFamily: 'var(--font-head)', fontWeight: 800, fontSize: '0.55rem', color: `${d.color}80`, letterSpacing: '0.08em' }}>
+        <div style={{ display: 'flex', alignItems: 'flex-start', justifyContent: 'space-between', gap: 10 }}>
+          <h3 style={{ fontFamily: 'var(--font-head)', fontWeight: 700, fontSize: '0.88rem', color: 'var(--clr-text)', lineHeight: 1.3, flex: 1 }}>{d.name}</h3>
+          <span style={{ fontFamily: 'var(--font-head)', fontWeight: 800, fontSize: '0.55rem', color: `${d.color}80`, letterSpacing: '0.08em', flexShrink: 0, paddingTop: 2 }}>
             {String(d.id).padStart(2, '0')}
           </span>
         </div>
@@ -170,7 +170,7 @@ export default function Disciplines() {
             Master{' '}<span style={{ background: 'var(--grad-text-hero)', WebkitBackgroundClip: 'text', WebkitTextFillColor: 'transparent', backgroundClip: 'text' }}>Every Discipline</span>
           </h2>
           <p style={{ color: 'var(--clr-muted)', fontSize: 'clamp(0.9rem,1.3vw,1rem)', lineHeight: 1.8, maxWidth: 540 }}>
-            Explore Karnataka's official roller skating disciplines — speed, artistic, freestyle, hockey, and more.
+            Explore Karnataka&apos;s official roller sports disciplines — from speed and artistic to hockey, freestyle, and skateboarding.
           </p>
         </motion.div>
       </div>

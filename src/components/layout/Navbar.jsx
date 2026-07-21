@@ -3,9 +3,9 @@ import { motion, AnimatePresence } from 'framer-motion';
 import { useNavigate, useLocation } from 'react-router-dom';
 import { useTheme } from '../../context/ThemeContext';
 const NAV_LINKS = [
-  { label:'Features',     href:'#features'     },
+  { label:'About',        href:'#about'        },
+  { label:'Districts',    href:'#districts'    },
   { label:'Disciplines',  href:'#disciplines'  },
-  { label:'How It Works', href:'#how-it-works' },
   { label:'Download',     href:'#download'     },
 ];
 
@@ -55,48 +55,14 @@ function ThemeToggleBtn() {
   );
 }
 
-function Toast({ show }) {
-  return (
-    <AnimatePresence>
-      {show && (
-        <motion.div
-          initial={{ opacity:0, y:-60, scale:0.88 }}
-          animate={{ opacity:1, y:0, scale:1 }}
-          exit={{ opacity:0, y:-60, scale:0.88 }}
-          transition={{ type:'spring', stiffness:280, damping:22 }}
-          style={{
-            position:'fixed', top:'100px',
-            left:0, right:0, margin:'0 auto',
-            width:'fit-content', maxWidth:'90vw',
-            zIndex:9999, display:'flex', alignItems:'center', gap:'14px',
-            background:'var(--clr-surface-2)', border:'1.5px solid var(--clr-accent)',
-            borderRadius:'18px', padding:'16px 32px',
-            boxShadow:'0 12px 60px rgba(255,107,0,0.3), 0 4px 20px rgba(0,0,0,0.4)',
-          }}
-        >
-          <span style={{ fontSize:'1.6rem' }}>🚀</span>
-          <div>
-            <div style={{ fontFamily:'var(--font-head)', fontWeight:800, fontSize:'1.1rem', color:'var(--clr-text)', marginBottom:3 }}>Coming Soon!</div>
-            <div style={{ fontSize:'0.85rem', color:'var(--clr-muted)' }}>App launching shortly — stay tuned!</div>
-          </div>
-        </motion.div>
-      )}
-    </AnimatePresence>
-  );
-}
+const PLAY_STORE_URL = 'https://play.google.com/store/apps/details?id=com.kodsskatekarnataka.app&pcampaignid=web_share';
 
 export default function Navbar() {
   const [scrolled,  setScrolled]  = useState(false);
   const [menuOpen,  setMenuOpen]  = useState(false);
   const [active,    setActive]    = useState('');
-  const [toast,     setToast]     = useState(false);
   const navigate = useNavigate();
   const location = useLocation();
-
-  const showToast = () => {
-    setToast(true);
-    setTimeout(() => setToast(false), 3000);
-  };
 
   useEffect(() => {
     const fn = () => setScrolled(window.scrollY > 60);
@@ -181,14 +147,17 @@ export default function Navbar() {
             <div style={{ width:'1px', height:'22px', background:'var(--clr-navbar-sep)', flexShrink:0 }}/>
 
             {/* CTA — pushed to far right */}
-            <button id="nav-get-app"
-              onClick={showToast}
+            <a id="nav-get-app"
+              href={PLAY_STORE_URL}
+              target="_blank"
+              rel="noopener noreferrer"
               style={{
                 position:'relative', display:'inline-flex', alignItems:'center', gap:'8px',
                 padding:'11px 26px', borderRadius:'12px', marginLeft:'0.5rem', marginRight:'0.75rem',
                 background:'var(--grad-accent)', color:'#fff', border:'none',
                 fontFamily:'var(--font-body)', fontWeight:700, fontSize:'0.84rem',
                 letterSpacing:'0.04em', cursor:'pointer', overflow:'hidden',
+                textDecoration:'none',
                 boxShadow:'0 4px 20px rgba(255,107,0,0.4), inset 0 1px 0 rgba(255,255,255,0.2)',
                 transition:'transform 0.22s, box-shadow 0.22s',
               }}
@@ -200,7 +169,7 @@ export default function Navbar() {
                 <path d="M12 16l-4-4h3V4h2v8h3l-4 4z"/><path d="M4 20h16"/>
               </svg>
               <span style={{ position:'relative' }}>Get the App</span>
-            </button>
+            </a>
           </div>
 
           {/* HAMBURGER */}
@@ -245,14 +214,20 @@ export default function Navbar() {
               <span style={{ color:'var(--clr-muted)', fontSize:'0.9rem' }}>Theme</span>
               <ThemeToggleBtn />
             </div>
-            <button onClick={()=>{ setMenuOpen(false); showToast(); }} style={{
+            <a
+              href={PLAY_STORE_URL}
+              target="_blank"
+              rel="noopener noreferrer"
+              onClick={() => setMenuOpen(false)}
+              style={{
               display:'flex', alignItems:'center', justifyContent:'center', gap:'8px',
               padding:'13px 24px', borderRadius:'12px', background:'var(--grad-accent)',
               color:'#fff', fontWeight:700, fontSize:'0.9rem', border:'none', cursor:'pointer',
+              textDecoration:'none',
               boxShadow:'0 4px 20px rgba(255,107,0,0.4)' }}>
               <svg width="14" height="14" fill="none" stroke="currentColor" strokeWidth="2.2" strokeLinecap="round" viewBox="0 0 24 24"><path d="M12 16l-4-4h3V4h2v8h3l-4 4z"/><path d="M4 20h16"/></svg>
               Get the App
-            </button>
+            </a>
           </motion.div>
         )}
       </AnimatePresence>
@@ -263,7 +238,6 @@ export default function Navbar() {
             style={{ position:'fixed', inset:0, background:'rgba(0,0,0,0.45)', zIndex:98 }}/>
         )}
       </AnimatePresence>
-      <Toast show={toast} />
       <style>{`
         @media(max-width:767px){
           #nav-hamburger{display:flex!important}
